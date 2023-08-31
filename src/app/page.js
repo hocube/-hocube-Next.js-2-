@@ -5,7 +5,7 @@ import ItemList from "./components/itemList/ItemList";
 import { Divider } from "@mui/material";
 
 export default function Home() {
-  // 상품을 저장하기 이ㅜ해서
+  // 상품을 저장하기 위해서
   const [list, setList] = useState([]);
   const API_URL = "/api/v1/products.json?brand=maybelline";
   const getData = () => {
@@ -28,11 +28,28 @@ export default function Home() {
     // <>
     //   <h1 id="main">main 창</h1>
     // </>
-    <div style={{width: "80%", margin:"auto", paddingTop:"20px"}}>
-      <h2>BEST 상품</h2>
-      {/* 구분선 */}
-      <Divider /> 
-      <ItemList list={list} />
-    </div>
+
+    // <div style={{width: "80%", margin:"auto", paddingTop:"20px"}}>
+    //   <h2>BEST 상품</h2>
+    //   {/* 구분선 */}
+    //   <Divider /> 
+    //   <ItemList list={list} />
+    // </div>
+
+    // 만약에 상위 9개만 베스트 상품이고
+    // 신상품이라고 가정해보자
+    <>
+      <div style={{width: "80%", margin:"auto", paddingTop:"20px"}}>
+         <h2>BEST 상품</h2>
+        <Divider /> 
+        <ItemList list={list.slice(0,9)} />
+      </div>
+
+      <div style={{width: "80%", margin:"auto", paddingTop:"20px"}}>
+        <h2>신상품</h2>
+        <Divider /> 
+        <ItemList list={list.slice(9)} />
+      </div>
+    </>
   )
 }
